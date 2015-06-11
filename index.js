@@ -11,6 +11,6 @@ app.get('/', function (req, res){
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-http.listen(process.env.PORT, function(){
+http.listen(process.env.PORT || 3000, function(){
   console.log('Your server is up and running on Port 3000. Good job!');
 });
