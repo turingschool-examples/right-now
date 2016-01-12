@@ -3,6 +3,17 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+const redis = require('redis');
+
+const client = redis.createClient();
+
+client.subscribe("community");
+
+client.on("message", function (channel, message) {
+  console.log(channel, message);
+  io.sockets.emit('chat message', JSON.parse(message));
+});
+
 const path = require('path');
 
 app.use(express.static('public'));
